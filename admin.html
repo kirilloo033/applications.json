@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="style.css">  <!-- Можно использовать тот же style.css -->
+</head>
+<body>
+    <div class="container">
+        <h1>Заявки</h1>
+        {% if applications %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Способ связи</th>
+                        <th>Контакт</th>
+                        <th>Сообщение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for app in applications %}
+                        <tr>
+                            <td>{{ app.name }}</td>
+                            <td>{{ app.contactMethod }}</td>
+                            <td>
+                                {% if app.phone %}
+                                    Телефон: {{ app.phone }}
+                                {% elif app.email %}
+                                    Email: {{ app.email }}
+                                {% elif app.telegram %}
+                                    Telegram: {{ app.telegram }}
+                                {% endif %}
+                            </td>
+                            <td>{{ app.message }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Нет заявок.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
